@@ -34,13 +34,15 @@ public class StaffController {
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(method=RequestMethod.GET, value="/staffs/{id}")
     public Staff show(@PathVariable String id) {
-        return staffRepository.findOne(id);
+        //return staffRepository.findOne(id);
+    		return staffRepository.findById(id).get();
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(method=RequestMethod.PUT, value="/staffs/{id}")
     public Staff update(@PathVariable String id, @RequestBody Staff staff) {
-        Staff stf = staffRepository.findOne(id);
+        //Staff stf = staffRepository.findOne(id);
+    	    Staff stf = staffRepository.findById(id).get();
         if(staff.getStaffName() != null)
         		stf.setStaffName(staff.getStaffName());
         if(staff.getPhoneNumbers() != null)
@@ -52,7 +54,8 @@ public class StaffController {
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(method=RequestMethod.DELETE, value="/staffs/{id}")
     public Staff delete(@PathVariable String id) {
-        Staff staff = staffRepository.findOne(id);
+        //Staff staff = staffRepository.findOne(id);
+    		Staff staff = staffRepository.findById(id).get();
         staffRepository.delete(staff);
         staff = new Staff();
         return staff;

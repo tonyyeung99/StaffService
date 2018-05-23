@@ -37,7 +37,8 @@ public class GroupController {
 
     @RequestMapping(method=RequestMethod.GET, value="/groups/{id}")
     public Group show(@PathVariable String id) {
-        return groupRepository.findOne(id);
+        //return groupRepository.findOne(id);
+    		return groupRepository.findById(id).get();
     }
 
     @RequestMapping(method=RequestMethod.PUT, value="/groups/{id}")
@@ -50,7 +51,8 @@ public class GroupController {
 
     @RequestMapping(method=RequestMethod.DELETE, value="/groups/{id}")
     public String delete(@PathVariable String id) {
-        Group group = groupRepository.findOne(id);
+        //Group group = groupRepository.findOne(id);
+        Group group = groupRepository.findById(id).get();
         groupRepository.delete(group);
 
         return "group deleted";

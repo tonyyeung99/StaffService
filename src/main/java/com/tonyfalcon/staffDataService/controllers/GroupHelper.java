@@ -19,7 +19,8 @@ public class GroupHelper {
 	public Group jsonToSpringData(JsonGroup jsonGroup, StaffRepository staffRepository) {
 		List<Staff> staffs = new ArrayList<Staff>();
 		for(JsonStaffID id : jsonGroup.getGrpStaffIds() ) {
-			staffs.add(staffRepository.findOne(id.getStaffId()));
+			//staffs.add(staffRepository.findOne(id.getStaffId()));
+			staffs.add(staffRepository.findById(id.getStaffId()).get());
 		}
 		Group group = shallowCloneGroupData(jsonGroup);
 		group.setGrpStaffs(staffs);
